@@ -1,10 +1,10 @@
 package com.project.mytrip.member.controller;
 
-import com.project.mytrip.member.domain.TestMember;
+import com.project.mytrip.member.domain.dto.MemberRequest;
+import com.project.mytrip.member.domain.dto.MemberResponse;
+import com.project.mytrip.member.domain.entity.Member;
 import com.project.mytrip.member.service.MemberService;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -12,8 +12,13 @@ import java.util.List;
 public class MemberController {
     private MemberService memberService;
 
-    @GetMapping(value = "/test/member")
-    public List<TestMember> findTestMember() {
+    @GetMapping(value = "/member")
+    public List<Member> findTestMember() {
         return memberService.findAllMember();
+    }
+
+    @PutMapping(value = "/member/join")
+    public MemberResponse joinMember(@RequestBody MemberRequest memberRequest) {
+        return memberService.joinMember(memberRequest);
     }
 }
