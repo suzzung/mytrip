@@ -14,7 +14,7 @@ import org.antlr.v4.runtime.misc.NotNull;
 @NoArgsConstructor
 public class Member {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int idx;
+    private long idx;
 
     @Column (length = 20,nullable = false)
     private String id;
