@@ -1,5 +1,6 @@
 package com.project.mytrip.member.controller;
 
+import com.project.mytrip.member.domain.dto.MemberModifyRequest;
 import com.project.mytrip.member.domain.dto.MemberRequest;
 import com.project.mytrip.member.domain.dto.MemberResponse;
 import com.project.mytrip.member.domain.entity.Member;
@@ -17,16 +18,21 @@ public class MemberController {
     private MemberService memberService;
 
     @GetMapping(value = "/member/search/all")
-    public List<Member> findAllMember() {
+    public List<MemberResponse> findAllMember() {
         return memberService.findAllMember();
     }
     @GetMapping(value = "/member/search/{idx}")
-    public Optional<Member> findTestMember(@PathVariable long idx) {
+    public MemberResponse findMember(@PathVariable long idx) {
         return memberService.findMember(idx);
     }
-    @PutMapping(value = "/member/join")
+    @PostMapping(value = "/member/join")
     public MemberResponse joinMember(@RequestBody MemberRequest memberRequest) {
         return memberService.joinMember(memberRequest);
     }
 
+    @PutMapping(value = "/member/modify/{idx}")
+    public MemberResponse modifyMember(@PathVariable long idx, @RequestBody MemberModifyRequest modifyRequest) {
+        modifyRequest.setIdx(idx);
+        return memberService.modifyMember(modifyRequest);
+    }
 }
