@@ -19,7 +19,8 @@ public class MemberService {
     }
 
     public MemberResponse joinMember(MemberRequest memberRequest) {
-        Member member = memberRepository.save(memberRequest);
+
+        Member member = memberRepository.save(MemberRequest.toEntity(memberRequest));
         return MemberResponse.toDto(member);
     }
 }
